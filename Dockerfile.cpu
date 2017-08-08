@@ -79,13 +79,16 @@ RUN pip3 --no-cache-dir install \
         hyperopt \
         folium \
         ipyleaflet \
+        xgboost \
         && \
     python3 -m ipykernel.kernelspec
 
 
-RUN git clone --recursive https://github.com/dmlc/xgboost && \
-    cd xgboost && \
-    make -j4
+# RUN git clone --recursive https://github.com/dmlc/xgboost && \
+#     cd xgboost && \
+#     make -j4 && \
+#     cd python-package && \
+#     python3 setup.py install
 
 
 # install tensorflow and keras
