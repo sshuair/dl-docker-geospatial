@@ -88,7 +88,8 @@ RUN pip3 --no-cache-dir install \
 
 
 RUN git clone --recursive https://github.com/dmlc/xgboost && \
-    cd xgboost && make -j4 && \
+    cd xgboost && \
+    make -j4
 
 
 # install tensorflow and keras
