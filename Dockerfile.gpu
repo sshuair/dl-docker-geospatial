@@ -82,7 +82,8 @@ RUN pip3 --no-cache-dir install \
         bokeh \
         geopandas \
         hyperopt \
-        # rasterio \  WARNING:root:Failed to get options via gdal-config: [Errno 2] No such file or directory: 'gdal-config
+        folium \
+        ipyleaflet \
         && \
     python3 -m ipykernel.kernelspec
 
@@ -123,8 +124,8 @@ EXPOSE 6006
 # jupyter noteboook
 EXPOSE 8888
 
-RUN mkdir /notebooks
+RUN mkdir /workdir
 
-WORKDIR "/notebooks"
+WORKDIR "/workdir"
 
 CMD ["/run_jupyter.sh", "--allow-root" ]

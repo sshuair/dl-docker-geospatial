@@ -11,12 +11,6 @@ ARG MXNET_VERISON=latest
 ARG KERAS_VERSION=1.2.0
 
 
-# # modify the ubuntu mirror to ali
-# RUN cp /etc/apt/sources.list /etc/apt/sources_backup.list && \
-#     sed -i "s|http://archive.ubuntu.com|http://mirrors.aliyun.com|g" /etc/apt/sources.list && \
-#     rm -rf /var/lib/apt/lists/* && \
-#     apt-get -y update && apt-get install -y fortunes
-
 
 # install dependencies
 RUN apt-get update --fix-missing && apt-get install -y --no-install-recommends\ 
@@ -83,6 +77,8 @@ RUN pip3 --no-cache-dir install \
         bokeh \
         geopandas \
         hyperopt \
+        folium \
+        ipyleaflet \
         && \
     python3 -m ipykernel.kernelspec
 
@@ -106,8 +102,6 @@ RUN pip3 --no-cache-dir install http://download.pytorch.org/whl/cu75/torch-0.2.0
 
 
 
-
-
 # TODO: 配置jupyter-Notebook，tensorboard已经可以运行
 # Set up our notebook config.
 COPY jupyter_notebook_config.py /root/.jupyter/
@@ -124,8 +118,8 @@ EXPOSE 6006
 # jupyter noteboook
 EXPOSE 8888
 
-RUN mkdir /notebooks
+RUN mkdir /workdir
 
-WORKDIR "/notebooks"
+WORKDIR "/workdir"
 
 CMD ["/run_jupyter.sh", "--allow-root" ]
