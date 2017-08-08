@@ -50,7 +50,7 @@ RUN apt-get update && apt-get --fix-missing install -y python3-mapnik && \
 # install gdal  
 RUN add-apt-repository -y ppa:ubuntugis/ppa && \ 
     apt update && \ 
-    apt-get install -y --no-install-recommends gdal-bin python3-gdal && \
+    apt-get install -y --no-install-recommends gdal-bin libgdal-dev python3-gdal && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -80,6 +80,7 @@ RUN pip3 --no-cache-dir install \
         folium \
         ipyleaflet \
         xgboost \
+        rasterio \
         && \
     python3 -m ipykernel.kernelspec
 

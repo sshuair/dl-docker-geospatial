@@ -56,7 +56,7 @@ RUN apt-get update && apt-get --fix-missing install -y python3-mapnik && \
 # install gdal  
 RUN add-apt-repository -y ppa:ubuntugis/ppa && \ 
     apt update && \ 
-    apt-get install -y --no-install-recommends gdal-bin python3-gdal && \
+    apt-get install -y --no-install-recommends gdal-bin libgdal-dev python3-gdal && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
@@ -84,13 +84,17 @@ RUN pip3 --no-cache-dir install \
         hyperopt \
         folium \
         ipyleaflet \
+        xgboost \
+        rasterio \
         && \
     python3 -m ipykernel.kernelspec
 
 
-RUN git clone --recursive https://github.com/dmlc/xgboost && \
-    cd xgboost && \
-    make -j4
+# RUN git clone --recursive https://github.com/dmlc/xgboost && \
+#     cd xgboost && \
+#     make -j4
+#     cd python-package && \
+#     python3 setup.py install
 
 
 # install tensorflow and keras
