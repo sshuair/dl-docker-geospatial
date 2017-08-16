@@ -21,7 +21,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         python-pip \
         python-scipy && \
     rm -rf /var/lib/apt/lists/*
-
+RUN cd /opt && git clone https://github.com/alexgkendall/caffe-segnet
 ENV CAFFE_ROOT=/opt/caffe-segnet
 WORKDIR $CAFFE_ROOT
 
