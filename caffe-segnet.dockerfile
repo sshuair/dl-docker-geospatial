@@ -1,12 +1,16 @@
-FROM ubuntu:14.04
+# Don't edit this file directly, since it was generated from a template,
+# and you're changes will be *clobbered*.  Edit the template instead.
+
+
+FROM ubuntu:16.04
 
 
 ENV PYTHONPATH /opt/caffe-segnet/python
 
-#添加 caffe-segnet 的环境变量
+# Add caffe binaries to path
 ENV PATH $PATH:/opt/caffe-segnet/.build_release/tools
 
-#获取依赖项
+# Get dependencies
 RUN apt-get update && apt-get install -y \
   bc \
   cmake \
@@ -35,16 +39,19 @@ RUN apt-get update && apt-get install -y \
   wget \
   ipython-notebook
 
-#使用gcc 4.6
+# Use gcc 4.6
 RUN update-alternatives --install /usr/bin/cc cc /usr/bin/gcc-4.6 30 && \
   update-alternatives --install /usr/bin/c++ c++ /usr/bin/g++-4.6 30 && \
   update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.6 30 && \
-  update-alternatives --install /usr/bin/gcc g++ /usr/bin/g++-4.6 30 &&
+  update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.6 30
 
-#克隆 caffe-segnet 仓库
+
+
+# Clone the Caffe repo
 RUN cd /opt && git clone https://github.com/alexgkendall/caffe-segnet
 
-#Glog
+
+# Glog
 RUN cd /opt && wget https://google-glog.googlecode.com/files/glog-0.3.3.tar.gz && \
   tar zxvf glog-0.3.3.tar.gz && \
   cd /opt/glog-0.3.3 && \
@@ -60,55 +67,53 @@ RUN cd /opt && wget https://google-glog.googlecode.com/files/glog-0.3.3.tar.gz &
 #       so maybe LD_LIBRARY_PATh is a better approach (or add call to ldconfig in ~/.bashrc)
 RUN ldconfig
 
-#Gflag
+# Gflags
 RUN cd /opt && \
   wget https://github.com/schuhschuh/gflags/archive/master.zip && \
   unzip master.zip && \
   cd /opt/gflags-master && \
   mkdir build && \
   cd /opt/gflags-master/build && \
-  export CXXFLAG = "-fPIC" && \
+  export CXXFLAGS="-fPIC" && \
   cmake .. && \
-  make && VERBOSE = 1 && \
+  make VERBOSE=1 && \
   make && \
   make install
 
-
-#编译caffe-segnet
+# Build Caffe core
 RUN cd /opt/caffe-segnet && \
-  cp Makefile,config,example Makefile.config && \
-  echo "CPU_ONLY :=1" >> Makefile.config && \
+  cp Makefile.config.example Makefile.config && \
+   echo "CPU_ONLY := 1" >> Makefile.config && \ 
   echo "CXX := /usr/bin/g++-4.6" >> Makefile.config && \
   sed -i 's/CXX :=/CXX ?=/' Makefile && \
   make all
 
-
-#添加 ld.so.conf ：可以找到 libcaffe.so
-
+# Add ld-so.conf so it can find libcaffe.so
 ADD caffe-ld-so.conf /etc/ld.so.conf.d/
 
-#运行 ldconfig
+# Run ldconfig again (not sure if needed)
 RUN ldconfig
 
-#安装Python 依赖项
-
+# Install python deps
 RUN cd /opt/caffe-segnet && \
   cat python/requirements.txt | xargs -L 1 sudo pip install
 
-
-#numpy
+# Numpy include path hack - github.com/BVLC/caffe/wiki/Ubuntu-14.04-VirtualBox-VM
 RUN ln -s /usr/include/python2.7/ /usr/local/include/python2.7 && \
   ln -s /usr/local/lib/python2.7/dist-packages/numpy/core/include/numpy/ /usr/local/include/python2.7/numpy
 
-#编译caffe Python 依赖项
-RUN cd /opt/caffe-segment && make pycaffe
+# Build Caffe python bindings
+RUN cd /opt/caffe-segnet && make pycaffe
 
-#make + run test
-RUN cd /opt/caffe-segment && make test && make runtest
+
+# Make + run tests
+RUN cd /opt/caffe-segnet && make test && make runtest
+
+# install tensorflow
+RUN pip install --upgrade https://storage.googleapis.com/tensorflow/linux/cpu/tensorflow-0.7.1-cp27-none-linux_x86_64.whl
 
 RUN mkdir /work
 
 VOLUME /work
 
 EXPOSE 7777
-
