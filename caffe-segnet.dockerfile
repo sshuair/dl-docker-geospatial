@@ -7,7 +7,10 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         git \
         wget \
         libboost-all-dev \
+        gfortran \
+        libjpeg62 \
         libgflags-dev \
+        libfreeimage-dev \
         libgoogle-glog-dev \
         libhdf5-serial-dev \
         libleveldb-dev \
@@ -15,6 +18,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libopencv-dev \
         libprotobuf-dev \
         libsnappy-dev \
+        libatlas-base-dev \
+        pkgconf \
         protobuf-compiler \
         python-dev \
         python-numpy \
