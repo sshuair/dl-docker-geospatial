@@ -1,4 +1,4 @@
-FROM ubunbu:14.04
+FROM ubuntu:14.04
 
 
 ENV PYTHONPATH /opt/caffe-segnet/python
