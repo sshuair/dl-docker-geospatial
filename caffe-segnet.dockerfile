@@ -31,7 +31,6 @@ ENV CLONE_TAG=master
 RUN cd /opt/caffe-segnet && \
   cp Makefile.config.example Makefile.config && \
    echo "CPU_ONLY := 1" >> Makefile.config && \ 
-  echo "CXX := /usr/bin/g++-4.6" >> Makefile.config && \
   sed -i 's/CXX :=/CXX ?=/' Makefile && \
   make all
 
