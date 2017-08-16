@@ -45,10 +45,6 @@ ENV PYTHONPATH $PYCAFFE_ROOT:$PYTHONPATH
 ENV PATH $CAFFE_ROOT/build/tools:$PYCAFFE_ROOT:$PATH
 RUN echo "$CAFFE_ROOT/build/lib" >> /etc/ld.so.conf.d/caffe.conf && ldconfig
 # Add ld-so.conf so it can find libcaffe.so
-ADD caffe-ld-so.conf /etc/ld.so.conf.d/
-
-# Run ldconfig again (not sure if needed)
-RUN ldconfig
 
 # Install python deps
 RUN cd /opt/caffe-segnet && \
