@@ -33,7 +33,7 @@ WORKDIR $CAFFE_ROOT
 # FIXME: clone a specific git tag and use ARG instead of ENV once DockerHub supports this.
 ENV CLONE_TAG=master
 
-RUN apt-get install openblas
+
 RUN cd /opt/caffe-segnet && \
   cp Makefile.config.example Makefile.config && \
    echo "CPU_ONLY := 1" >> Makefile.config && \ 
