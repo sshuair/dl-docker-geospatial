@@ -56,7 +56,8 @@ RUN apt-get update && apt-get --fix-missing install -y python-mapnik && \
 # install gdal  
 RUN add-apt-repository -y ppa:ubuntugis/ppa && \ 
     apt update && \ 
-    apt-get install -y --no-install-recommends gdal-bin python-gdal && \
+    apt-get install gdal-bin && \
+    pip install gdal && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
