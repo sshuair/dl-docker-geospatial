@@ -1,51 +1,75 @@
-FROM ruimashita/caffe-cpu-segnet
-MAINTAINER sshuair<sshuair@gmail.com>
+FROM ubuntu:14.04
 
-# version settings
-# ARG PYTHON_VERSION=3.5
-ARG TENSORFLOW_ARCH=cpu
-ARG TENSORFLOW_VERSION=1.2.1
-ARG PYTORCH_VERSION=v0.2
-ARG MXNET_VERISON=latest
-ARG KERAS_VERSION=1.2.0
+MAINTAINER takuya.wakisaka@moldweorp.com
 
+ENV PYTHONPATH /opt/caffe-segnet/python
+ENV PATH $PATH:/opt/caffe-segnet/.build_release/tools
 
-# # modify the ubuntu mirror to ali
-# RUN cp /etc/apt/sources.list /etc/apt/sources_backup.list && \
-#     sed -i "s|http://archive.ubuntu.com|http://mirrors.aliyun.com|g" /etc/apt/sources.list && \
-#     rm -rf /var/lib/apt/lists/* && \
-#     apt-get -y update && apt-get install -y fortunes
+# faster apt source
+RUN echo "deb mirror://mirrors.ubuntu.com/mirrors.txt trusty main restricted universe multiverse \n\
+deb mirror://mirrors.ubuntu.com/mirrors.txt trusty-updates main restricted universe multiverse \n\
+deb mirror://mirrors.ubuntu.com/mirrors.txt trusty-backports main restricted universe multiverse \n\
+deb mirror://mirrors.ubuntu.com/mirrors.txt trusty-security main restricted universe multiverse" > /etc/apt/sources.list
 
+RUN RUN apt-get update --fix-missing && apt-get install -y --no-install-recommends\ 
+  bc \
+  git \
+  unzip \
+  wget \
+  curl \
 
-# install dependencies
-RUN apt-get update --fix-missing && apt-get install -y --no-install-recommends\ 
-        build-essential \
-        software-properties-common \
-        curl \
-        cmake \
-        libfreetype6-dev \
-        libpng12-dev \
-        libzmq3-dev \
-        pkg-config \
-        rsync \
-        zip \
-        unzip \
-        git \
-        wget \
-        vim \
-        ca-certificates \
-        python \
-        python-dev \
-        python-pip \
-        ipython \
-        # graphviz \
-        && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+  # for caffe
+  libprotobuf-dev \
+  libleveldb-dev \
+  libsnappy-dev \
+  libopencv-dev \
+  libhdf5-serial-dev \
+  protobuf-compiler \
+  libatlas-base-dev \
+  libgflags-dev \
+  libgoogle-glog-dev \
+  liblmdb-dev \
+  libboost-all-dev \
 
+  # for caffe python
+  python-dev \
+  python-pip \
+  python-numpy \
+  # for scipy
+  gfortran \
+  # fix: InsecurePlatformWarning: A true SSLContext object is not available.
+  libffi-dev \
+  libssl-dev \
+  build-essential \
+  software-properties-common \
+  cmake \
+  
 
+  && apt-get clean \
+  && rm -rf /var/lib/apt/lists/
 
-# install mapnik ，note: mapnik must install before gdal
+RUN cd /opt && git clone https://github.com/alexgkendall/caffe-segnet.git && cd caffe-segnet
+
+WORKDIR /opt/caffe-segnet
+
+# Build Caffe core
+RUN cp Makefile.config.example Makefile.config && \
+    echo "CPU_ONLY := 1" >> Makefile.config && \
+    make -j"$(nproc)" all
+
+# Install python deps
+RUN pip install --upgrade pip && \
+    # fix: InsecurePlatformWarning: A true SSLContext object is not available.
+    pip install pyopenssl ndg-httpsclient pyasn1 && \
+    for req in $(cat python/requirements.txt); do pip install $req; done
+
+# Build Caffe python
+RUN make -j"$(nproc)" pycaffe
+
+# test + run tests
+RUN make -j"$(nproc)" test
+# RUN cd /opt/caffe && make runtes
+
 RUN apt-get update && apt-get --fix-missing install -y python-mapnik && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
