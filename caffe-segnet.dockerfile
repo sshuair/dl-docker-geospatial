@@ -25,6 +25,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libgoogle-glog-dev \
         libhdf5-serial-dev \
         libleveldb-dev \
+        libgdal-dev \
+        libgdal20 \
         liblmdb-dev \
         libopencv-dev \
         libprotobuf-dev \
@@ -85,14 +87,12 @@ RUN pip --no-cache-dir install \
     python -m ipykernel.kernelspec
 
 
-RUN mv /etc/apt/sources.list.d/pgdg-source.list* /tmp
-RUN apt-get remove -y libgdal20
+
 RUN add-apt-repository -y ppa:ubuntugis/ubuntugis-unstable
 RUN apt-get update -y
 
-RUN add-apt-repository -y ppa:ubuntugis/ppa && \ 
-    apt update && \ 
-    apt-get install -y --no-install-recommends gdal-bin libgdal-dev python-gdal && \
+
+RUN apt-get install -y --no-install-recommends gdal-bin libgdal-dev python-gdal && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
