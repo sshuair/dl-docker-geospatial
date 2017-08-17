@@ -1,14 +1,10 @@
-FROM kmader/caffe-segnet
+FROM ruimashita/caffe-cpu-segnet
 MAINTAINER jingcb@geohey.com
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         build-essential \
         bc \
         cmake \
-        gcc-4.6 \
-        g++-4.6 \
-        gcc-4.6-multilib \
-        g++-4.6-multilib \
         software-properties-common \
         curl \
         git \
@@ -88,12 +84,9 @@ RUN pip --no-cache-dir install \
     python -m ipykernel.kernelspec
 
 
-
-RUN add-apt-repository -y ppa:ubuntugis/ubuntugis-unstable
-RUN apt-get update -y
-
-
-RUN apt-get install -y --no-install-recommends gdal-bin libgdal-dev python-gdal && \
+RUN add-apt-repository -y ppa:ubuntugis/ppa && \ 
+    apt update && \ 
+    apt-get install -y --no-install-recommends gdal-bin libgdal-dev python3-gdal && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
