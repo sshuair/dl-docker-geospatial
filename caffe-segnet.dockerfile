@@ -1,47 +1,46 @@
 FROM ruimashita/caffe-cpu-segnet
-MAINTAINER jingcb@geohey.com
+MAINTAINER sshuair<sshuair@gmail.com>
 
-RUN apt-get update && apt-get install -y --no-install-recommends \
+# version settings
+# ARG PYTHON_VERSION=3.5
+ARG TENSORFLOW_ARCH=cpu
+ARG TENSORFLOW_VERSION=1.2.1
+ARG PYTORCH_VERSION=v0.2
+ARG MXNET_VERISON=latest
+ARG KERAS_VERSION=1.2.0
+
+
+# # modify the ubuntu mirror to ali
+# RUN cp /etc/apt/sources.list /etc/apt/sources_backup.list && \
+#     sed -i "s|http://archive.ubuntu.com|http://mirrors.aliyun.com|g" /etc/apt/sources.list && \
+#     rm -rf /var/lib/apt/lists/* && \
+#     apt-get -y update && apt-get install -y fortunes
+
+
+# install dependencies
+RUN apt-get update --fix-missing && apt-get install -y --no-install-recommends\ 
         build-essential \
-        bc \
-        cmake \
         software-properties-common \
         curl \
-        git \
-        wget \
-        libyaml-dev \
+        cmake \
         libfreetype6-dev \
         libpng12-dev \
         libzmq3-dev \
-        libboost-all-dev \
-        gfortran \
-        libjpeg62 \
-        libgflags-dev \
-        libfreeimage-dev \
-        libgoogle-glog-dev \
-        libhdf5-serial-dev \
-        libleveldb-dev \
-        libgdal-dev \
-        liblmdb-dev \
-        libopencv-dev \
-        libprotobuf-dev \
-        libsnappy-dev \
-        libatlas-base-dev \
-        pkgconf \
+        pkg-config \
         rsync \
         zip \
         unzip \
+        git \
+        wget \
         vim \
         ca-certificates \
-        protobuf-compiler \
         python \
         python-dev \
-        python-numpy \
         python-pip \
         ipython \
-        gdal-bin \
-        python-gdal \
-        python-scipy && \
+        # graphviz \
+        && \
+    apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
 
@@ -53,8 +52,13 @@ RUN apt-get update && apt-get --fix-missing install -y python-mapnik && \
 
 
 
+# install gdal  
+RUN add-apt-repository -y ppa:ubuntugis/ppa && \ 
+    apt update && \ 
+    apt-get install -y --no-install-recommends gdal-bin libgdal-dev python-gdal && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
-RUN pip install pip --upgrade
 
 # install python package
 RUN pip --no-cache-dir install \
@@ -84,11 +88,9 @@ RUN pip --no-cache-dir install \
     python -m ipykernel.kernelspec
 
 
-RUN add-apt-repository -y ppa:ubuntugis/ppa && \ 
-    apt update && \ 
-    apt-get install -y --no-install-recommends gdal-bin libgdal-dev python3-gdal && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
+
+
+
 
 
 # TODO: 配置jupyter-Notebook，tensorboard已经可以运行
@@ -109,12 +111,6 @@ EXPOSE 8888
 
 RUN mkdir /workdir
 
+WORKDIR "/workdir"
 
-
-
-
-
-
-
-
-WORKDIR /workspace
+CMD ["/run_jupyter.sh", "--allow-root" ]
