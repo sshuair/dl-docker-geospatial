@@ -1,9 +1,14 @@
 FROM ubuntu:14.04
-MAINTAINER caffe-maint@googlegroups.com
+MAINTAINER jingcb@geohey.com
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
         build-essential \
+        bc \
         cmake \
+        gcc-4.6 \
+        g++-4.6 \
+        gcc-4.6-multilib \
+        g++-4.6-multilib \
         software-properties-common \
         curl \
         git \
@@ -39,6 +44,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         ipython \
         python-scipy && \
     rm -rf /var/lib/apt/lists/*
+
+
+RUN update-alternatives --install /usr/bin/cc cc /usr/bin/gcc-4.6 30 && \
+  update-alternatives --install /usr/bin/c++ c++ /usr/bin/g++-4.6 30 && \
+  update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.6 30 && \
+  update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.6 30
 RUN cd /opt && git clone https://github.com/alexgkendall/caffe-segnet
 ENV CAFFE_ROOT=/opt/caffe-segnet
 WORKDIR $CAFFE_ROOT
@@ -46,6 +57,17 @@ WORKDIR $CAFFE_ROOT
 # FIXME: clone a specific git tag and use ARG instead of ENV once DockerHub supports this.
 ENV CLONE_TAG=master
 
+RUN cd /opt && \
+  wget https://github.com/schuhschuh/gflags/archive/master.zip && \
+  unzip master.zip && \
+  cd /opt/gflags-master && \
+  mkdir build && \
+  cd /opt/gflags-master/build && \
+  export CXXFLAGS="-fPIC" && \
+  cmake .. && \
+  make VERBOSE=1 && \
+  make && \
+  make install
 
 RUN cd /opt/caffe-segnet && \
   cp Makefile.config.example Makefile.config && \
