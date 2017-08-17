@@ -55,7 +55,7 @@ RUN apt-get update && apt-get --fix-missing install -y python-mapnik && \
 
 
 
-
+RUN pip insall pip --upgrade
 
 # install python package
 RUN pip --no-cache-dir install \
