@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM kmader/caffe-segnet
 MAINTAINER jingcb@geohey.com
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
@@ -45,56 +45,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         python-scipy && \
     rm -rf /var/lib/apt/lists/*
 
-
-RUN update-alternatives --install /usr/bin/cc cc /usr/bin/gcc-4.6 30 && \
-  update-alternatives --install /usr/bin/c++ c++ /usr/bin/g++-4.6 30 && \
-  update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.6 30 && \
-  update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.6 30
-RUN cd /opt && git clone https://github.com/alexgkendall/caffe-segnet
-ENV CAFFE_ROOT=/opt/caffe-segnet
-WORKDIR $CAFFE_ROOT
-
-# FIXME: clone a specific git tag and use ARG instead of ENV once DockerHub supports this.
-ENV CLONE_TAG=master
-
-RUN cd /opt && \
-  wget https://github.com/schuhschuh/gflags/archive/master.zip && \
-  unzip master.zip && \
-  cd /opt/gflags-master && \
-  mkdir build && \
-  cd /opt/gflags-master/build && \
-  export CXXFLAGS="-fPIC" && \
-  cmake .. && \
-  make VERBOSE=1 && \
-  make && \
-  make install
-
-RUN cd /opt/caffe-segnet && \
-  cp Makefile.config.example Makefile.config && \
-   echo "CPU_ONLY := 1" >> Makefile.config && \ 
-  make all
-
-
-ENV PYCAFFE_ROOT $CAFFE_ROOT/python
-ENV PYTHONPATH $PYCAFFE_ROOT:$PYTHONPATH
-ENV PATH $CAFFE_ROOT/build/tools:$PYCAFFE_ROOT:$PATH
-RUN echo "$CAFFE_ROOT/build/lib" >> /etc/ld.so.conf.d/caffe.conf && ldconfig
-# Add ld-so.conf so it can find libcaffe.so
-
-# Install python deps
-RUN cd /opt/caffe-segnet && \
-  cat python/requirements.txt | xargs -L 1 sudo pip install
-
-# Numpy include path hack - github.com/BVLC/caffe/wiki/Ubuntu-14.04-VirtualBox-VM
-RUN ln -s /usr/include/python2.7/ /usr/local/include/python2.7 && \
-  ln -s /usr/local/lib/python2.7/dist-packages/numpy/core/include/numpy/ /usr/local/include/python2.7/numpy
-
-# Build Caffe python bindings
-RUN cd /opt/caffe-segnet && make pycaffe
-
-
-# Make + run tests
-RUN cd /opt/caffe-segnet && make test && make runtest
 
 
 # install mapnik ，note: mapnik must install before gdal
