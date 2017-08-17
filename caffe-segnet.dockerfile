@@ -87,7 +87,11 @@ RUN pip --no-cache-dir install \
 
 
 
-
+RUN add-apt-repository -y ppa:ubuntugis/ppa && \ 
+    apt update && \ 
+    apt-get install -y --no-install-recommends gdal-bin libgdal-dev python3-gdal && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 
 # TODO: 配置jupyter-Notebook，tensorboard已经可以运行
