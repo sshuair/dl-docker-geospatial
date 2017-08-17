@@ -85,7 +85,10 @@ RUN pip --no-cache-dir install \
     python -m ipykernel.kernelspec
 
 
-
+RUN mv /etc/apt/sources.list.d/pgdg-source.list* /tmp
+RUN apt-get remove -y libgdal20
+RUN add-apt-repository -y ppa:ubuntugis/ubuntugis-unstable
+RUN apt-get update -y
 
 RUN add-apt-repository -y ppa:ubuntugis/ppa && \ 
     apt update && \ 
