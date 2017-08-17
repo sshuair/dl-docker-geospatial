@@ -26,7 +26,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         libhdf5-serial-dev \
         libleveldb-dev \
         libgdal-dev \
-        libgdal20 \
         liblmdb-dev \
         libopencv-dev \
         libprotobuf-dev \
@@ -44,6 +43,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         python-numpy \
         python-pip \
         ipython \
+        gdal-bin \
+        python-gdal \
         python-scipy && \
     rm -rf /var/lib/apt/lists/*
 
