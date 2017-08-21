@@ -49,6 +49,7 @@ RUN wget http://download.osgeo.org/gdal/1.11.0/gdal-1.11.0.tar.gz && \
   make install && \
   rm -rf /var/lib/apt/lists/*
 
+RUN export LD_PRELOAD=/usr/local/lib/libgdal.so.1
 
 
 # install python package
