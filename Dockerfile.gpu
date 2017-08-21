@@ -4,11 +4,11 @@ MAINTAINER sshuair<sshuair@gmail.com>
 
 # version settings
 # ARG PYTHON_VERSION=3.5
-ARG TENSORFLOW_ARCH=cpu
-ARG TENSORFLOW_VERSION=1.2.1
-ARG PYTORCH_VERSION=v0.2
-ARG MXNET_VERISON=latest
-ARG KERAS_VERSION=1.2.0
+# ARG TENSORFLOW_ARCH=cpu
+# ARG TENSORFLOW_VERSION=1.2.1
+# ARG PYTORCH_VERSION=v0.2
+# ARG MXNET_VERISON=latest
+# ARG KERAS_VERSION=1.2.0
 
 
 # # modify the ubuntu mirror to ali
@@ -99,7 +99,7 @@ RUN pip3 --no-cache-dir install \
 
 
 # install tensorflow and keras
-RUN pip3 --no-cache-dir install tensorflow-gpu && \
+RUN pip3 --no-cache-dir install https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-1.3.0-cp35-cp35m-linux_x86_64.whl && \
     pip3 --no-cache-dir install keras
 
 # install mxnet
