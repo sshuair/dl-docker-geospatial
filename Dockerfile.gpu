@@ -99,16 +99,16 @@ RUN pip3 --no-cache-dir install \
 
 
 # install tensorflow and keras
-RUN pip3 --no-cache-dir install https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-1.2.1-cp35-cp35m-linux_x86_64.whl && \
-    pip3 install keras
+RUN pip3 --no-cache-dir install tensorflow-gpu && \
+    pip3 --no-cache-dir install keras
 
 # install mxnet
 RUN pip3 --no-cache-dir install mxnet-cu80  && \
-    pip3 install graphviz
+    pip3 --no-cache-dir install graphviz
 
 # install pytorch
 RUN pip3 --no-cache-dir install http://download.pytorch.org/whl/cu80/torch-0.2.0.post1-cp35-cp35m-manylinux1_x86_64.whl && \ 
-    pip3 install torchvision
+    pip3 --no-cache-dir install torchvision
 
 
 
