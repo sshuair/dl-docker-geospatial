@@ -122,3 +122,5 @@ docker tag server:latest myname/server:latest
 `docker rmi $(docker ps -a -q)`
 - 从 container 到 主机（host）  
 `docker cp containerId:/file/path/within/container /host/path/target`
+- 主机与容器的端口对应
+`docker run -p hostPort:containerPort <image-name>`
