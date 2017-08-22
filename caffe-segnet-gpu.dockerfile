@@ -1,4 +1,4 @@
-FROM nvidia/cuda:8.0-cudnn6-devel-ubuntu16.04
+FROM 8.0-cudnn6-runtime-ubuntu14.04
 
 MAINTAINER jingcb@geohey.com
 
