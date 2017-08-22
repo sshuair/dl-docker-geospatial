@@ -1,4 +1,4 @@
-FROM ubuntu:14.04
+FROM nvidia/cuda:6.5-runtime-ubuntu14.04
 
 MAINTAINER jingcb@geohey.com
 
