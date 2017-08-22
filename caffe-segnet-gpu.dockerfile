@@ -51,7 +51,7 @@ WORKDIR /opt/caffe-segnet
 # Build Caffe core
 RUN cp Makefile.config.example Makefile.config && \
     echo "USE_CUDNN :=1" >> Makefile.config && \
-    echo "INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include/usr/lcoal/cuda/include" >> Makefile && \
+    echo "INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include/usr/lcoal/cuda/include" >> Makefile.config && \
     make -j"$(nproc)" all
 
 # Install python deps
