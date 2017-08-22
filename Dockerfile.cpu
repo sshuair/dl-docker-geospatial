@@ -82,6 +82,7 @@ RUN pip3 --no-cache-dir install \
         xgboost \
         rasterio \
         progressbar33 \
+        opencv-contrib-python \
         && \
     python3 -m ipykernel.kernelspec
 
@@ -95,15 +96,15 @@ RUN pip3 --no-cache-dir install \
 
 # install tensorflow and keras
 RUN pip3 --no-cache-dir install tensorflow && \
-    pip3 install keras
+    pip3 --no-cache-dir install keras
 
 # install mxnet
 RUN pip3 --no-cache-dir install mxnet  && \
-    pip3 install graphviz
+    pip3 --no-cache-dir install graphviz
 
 # install pytorch
 RUN pip3 --no-cache-dir install http://download.pytorch.org/whl/cu75/torch-0.2.0.post1-cp35-cp35m-manylinux1_x86_64.whl && \ 
-    pip3 install torchvision
+    pip3 --no-cache-dir install torchvision
 
 
 

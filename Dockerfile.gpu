@@ -87,6 +87,7 @@ RUN pip3 --no-cache-dir install \
         xgboost \
         rasterio \
         progressbar33 \
+        opencv-contrib-python \
         && \
     python3 -m ipykernel.kernelspec
 
