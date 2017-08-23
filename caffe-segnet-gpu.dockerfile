@@ -23,16 +23,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         python-scipy && \
     rm -rf /var/lib/apt/lists/*
 
-ENV CAFFE_ROOT=/opt/caffe
+ENV CAFFE_ROOT=/opt/caffe-segnet
 WORKDIR $CAFFE_ROOT
 
 # FIXME: clone a specific git tag and use ARG instead of ENV once DockerHub supports this.
 ENV CLONE_TAG="segnet-cleaned"
 
-RUN git clone -b ${CLONE_TAG} --depth 1 https://github.com/alexgkendall/caffe-segnet.git . && \
+RUN cd /opt && git clone -b ${CLONE_TAG} --depth 1 https://github.com/alexgkendall/caffe-segnet.git . && \
     for req in $(cat python/requirements.txt) pydot; do pip install $req; done && \
+    git clone https://github.com/NVIDIA/nccl.git && cd nccl && make -j install && cd .. && rm -rf nccl && \
     mkdir build && cd build && \
-    cmake -DUSE_CUDNN=1 .. && \
+    cmake -DUSE_CUDNN=1 -DUSE_NCCL=1.. && \
     make -j"$(nproc)"
 
 ENV PYCAFFE_ROOT $CAFFE_ROOT/python
