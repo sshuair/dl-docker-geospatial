@@ -1,4 +1,4 @@
-FROM nvidia/cuda:7.5-cudnn5-devel-ubuntu14.04
+FROM nvidia/cuda:8.0-cudnn6-devel-ubuntu16.04
 MAINTAINER jingcb@geohey.com
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
