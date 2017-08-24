@@ -6,7 +6,6 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         cmake \
         git \
         wget \
-        pk-config \
         libprotobuf-dev \
         libleveldb-dev \
         libsnappy-dev \
