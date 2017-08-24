@@ -92,12 +92,10 @@ RUN apt-get update && apt-get --fix-missing install -y python-mapnik && \
 
 
 # install gdal  
-RUN wget http://download.osgeo.org/gdal/1.11.0/gdal-1.11.0.tar.gz && \
-  tar xvfz gdal-1.11.0.tar.gz && \
-  cd gdal-1.11.0 && \
-  ./configure --with-python && \
-  make && \
-  make install && \
+RUN add-apt-repository -y ppa:ubuntugis/ubuntugis-unstable && \
+    apt update && \
+    apt install gdal-bin python-gdal python-gdal && \
+    apt-get clean && \
   rm -rf /var/lib/apt/lists/*
 
 RUN export LD_PRELOAD=/usr/local/lib/libgdal.so.1
