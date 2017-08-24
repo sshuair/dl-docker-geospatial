@@ -32,7 +32,7 @@ ENV CLONE_TAG="segnet-cleaned"
 RUN git clone -b ${CLONE_TAG} --depth 1 https://github.com/alexgkendall/caffe-segnet.git . && \
     for req in $(cat python/requirements.txt) pydot; do pip install $req; done && \
     mkdir build && cd build && \
-    cmake -DUSE_CUDNN=1 CUDA_DIR := /usr/local/cuda8.0 WITH_PYTHON_LAYER := 1.. && \
+    cmake -DUSE_CUDNN=1 CUDA_DIR := /usr/local/cuda-8.0 WITH_PYTHON_LAYER := 1.. && \
     make -j"$(nproc)"
 
 ENV PYCAFFE_ROOT $CAFFE_ROOT/python
