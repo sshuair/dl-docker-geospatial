@@ -93,10 +93,10 @@ RUN apt-get update && apt-get --fix-missing install -y python-mapnik && \
 
 # install gdal  
 RUN add-apt-repository -y ppa:ubuntugis/ubuntugis-unstable && \
-    apt update && \
-    apt install gdal-bin python-gdal python-gdal && \
+    apt update && \ 
+    apt-get install -y --no-install-recommends gdal-bin libgdal-dev python-gdal && \
     apt-get clean && \
-  rm -rf /var/lib/apt/lists/*
+    rm -rf /var/lib/apt/lists/*
 
 RUN export LD_PRELOAD=/usr/local/lib/libgdal.so.1
 RUN export LD_LIBRARY_PATH=/lib:/usr/lib:/usr/local/lib
