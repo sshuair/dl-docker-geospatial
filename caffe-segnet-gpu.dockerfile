@@ -38,6 +38,7 @@ RUN cd /opt && git clone https://github.com/alexgkendall/caffe-segnet.git && \
     echo "LIBRARY_DIRS := /usr/lib /usr/local/lib /usr/lib /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/hdf5/serial" >> Makefile.config && \
     echo "CUDA_DIR := /usr/local/cuda-8.0" >> Makefile.config && \
     cd python && \
+    pip install --upgrade pip && \
     for req in $(cat requirements.txt); do pip install $req; done && \
     cd ../ && \
     make -j"$(nproc)"
