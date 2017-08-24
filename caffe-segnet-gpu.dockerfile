@@ -6,34 +6,39 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         cmake \
         git \
         wget \
+        pk-config \
+        libprotobuf-dev \
+        libleveldb-dev \
+        libsnappy-dev \
+        libhdf5-serial-dev \
+        protobuf-compiler \
         libatlas-base-dev \
         libboost-all-dev \
         libgflags-dev \
         libgoogle-glog-dev \
-        libhdf5-serial-dev \
-        libleveldb-dev \
         liblmdb-dev \
-        libopencv-dev \
-        libprotobuf-dev \
-        libsnappy-dev \
-        protobuf-compiler \
+        python-pip \
         python-dev \
         python-numpy \
-        python-pip \
-        python-scipy && \
+        python-scipy \
+        libopencv-dev \
+        && \
     rm -rf /var/lib/apt/lists/*
 
-ENV CAFFE_ROOT=/opt/caffe
+ENV CAFFE_ROOT=/opt/caffe-segnet
 WORKDIR $CAFFE_ROOT
 
 # FIXME: clone a specific git tag and use ARG instead of ENV once DockerHub supports this.
-ENV CLONE_TAG="segnet-cleaned"
-
-RUN pip install --upgrade pip
-RUN git clone -b ${CLONE_TAG} --depth 1 https://github.com/alexgkendall/caffe-segnet.git . && \
-    for req in $(cat python/requirements.txt) pydot; do pip install $req; done && \
-    mkdir build && cd build && \
-    cmake -DUSE_CUDNN=1 CUDA_DIR := /usr/local/cuda-8.0 WITH_PYTHON_LAYER := 1.. && \
+ 
+RUN cd /opt && git clone https://github.com/alexgkendall/caffe-segnet.git && \
+    cp Makefile.config.example Makefile.config && \
+    echo "WITH_PYTHON_LAYER := 1" >> Makefile.config && \
+    echo "INCLUDE_DIRS := /usr/include/python2.7 /usr/lib/python2.7/dist-packages/numpy/core/include /usr/local/include /usr/include/hdf5/serial" >> Makefile.config && \
+    echo "LIBRARY_DIRS := /usr/lib /usr/local/lib /usr/lib /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/hdf5/serial" >> Makefile.config && \
+    echo "CUDA_DIR := /usr/local/cuda-8.0" >> Makefile.config && \
+    cd python && \
+    for req in $(cat requirements.txt); do pip install $req; done && \
+    cd ../ && \
     make -j"$(nproc)"
 
 ENV PYCAFFE_ROOT $CAFFE_ROOT/python
