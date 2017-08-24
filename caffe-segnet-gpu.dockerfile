@@ -31,6 +31,7 @@ WORKDIR $CAFFE_ROOT
 # FIXME: clone a specific git tag and use ARG instead of ENV once DockerHub supports this.
  
 RUN cd /opt && git clone https://github.com/alexgkendall/caffe-segnet.git && \
+    cd caffe-segnet && \
     cp Makefile.config.example Makefile.config && \
     echo "WITH_PYTHON_LAYER := 1" >> Makefile.config && \
     echo "INCLUDE_DIRS := /usr/include/python2.7 /usr/lib/python2.7/dist-packages/numpy/core/include /usr/local/include /usr/include/hdf5/serial" >> Makefile.config && \
