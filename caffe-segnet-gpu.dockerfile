@@ -34,14 +34,16 @@ RUN cd /opt && git clone https://github.com/alexgkendall/caffe-segnet.git && \
     cd caffe-segnet && \
     cp Makefile.config.example Makefile.config && \
     echo "WITH_PYTHON_LAYER := 1" >> Makefile.config && \
-    echo "INCLUDE_DIRS := /usr/include/python2.7 /usr/lib/python2.7/dist-packages/numpy/core/include /usr/local/include /usr/include/hdf5/serial" >> Makefile.config && \
+    echo "PYTHON_INCLUDE := /usr/include/python2.7 /usr/lib/python2.7/dist-packages/numpy/core/include /usr/local/lib/python2.7/dist-packages/numpy/core/include" >>Makefile.config && \
+    echo "INCLUDE_DIRS := /usr/include/python2.7 /usr/lib/python2.7/dist-packages/numpy/core/include /usr/local/lib/python2.7/dist-packages/numpy/core/include /usr/local/include /usr/include/hdf5/serial" >> Makefile.config && \
     echo "LIBRARY_DIRS := /usr/lib /usr/local/lib /usr/lib /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/hdf5/serial" >> Makefile.config && \
     echo "CUDA_DIR := /usr/local/cuda-8.0" >> Makefile.config && \
     cd python && \
     pip install --upgrade pip && \
     for req in $(cat requirements.txt); do pip install $req; done && \
     cd ../ && \
-    make -j"$(nproc)"
+    make -j"$(nproc)" && \
+    make pycaffe
 
 ENV PYCAFFE_ROOT $CAFFE_ROOT/python
 ENV PYTHONPATH $PYCAFFE_ROOT:$PYTHONPATH
@@ -94,7 +96,7 @@ RUN apt-get update && apt-get --fix-missing install -y python-mapnik && \
 # install gdal  
 RUN add-apt-repository -y ppa:ubuntugis/ubuntugis-unstable && \
     apt update && \ 
-    apt-get install -y --no-install-recommends gdal-bin libgdal-dev python-gdal && \
+    apt-get install -y --no-install-recommends gdal-bin python-gdal && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
