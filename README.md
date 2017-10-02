@@ -25,7 +25,7 @@ Deep learning docker with geo-package support. it's only support python3(current
 - ipyleaflet
 
 ## other related packages
-- Opencv3
+- OpenCV 3
 - Pillow
 - jupyter
 - scipy
@@ -48,7 +48,7 @@ Deep learning docker with geo-package support. it's only support python3(current
 
 ### start container
 1. cpu: `docker run -it --name dl-satellite -p 8888:8888 -p 6006:6006 -v /sharedfolder:/workdir sshuair/dl-satellite:cpu bash`
-2. gpu: `nvidia-docker run -it --name dl-satellite -p 8888:8888 -p 6006:6006 -v /sharedfolder:/workdir sshuair/dl-satellite:cpu bash`
+2. gpu: `nvidia-docker run -it --name dl-satellite -p 8888:8888 -p 6006:6006 -v /sharedfolder:/workdir sshuair/dl-satellite:gpu bash`
 
 
 ## useful command
