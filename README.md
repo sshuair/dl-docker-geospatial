@@ -4,7 +4,7 @@ Deep learning docker with geo-package support. it's only support python3(current
 
 ## deep learning framework
 - tensorflow 1.3
-- keras 2.6
+- keras 2.0.6
 - pytorch 0.2
 - mxnet 0.10
 
