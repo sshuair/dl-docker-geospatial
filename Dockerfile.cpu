@@ -83,6 +83,7 @@ RUN pip3 --no-cache-dir install \
         rasterio \
         progressbar33 \
         opencv-contrib-python \
+        tifffile \
         && \
     python3 -m ipykernel.kernelspec
 
@@ -103,7 +104,7 @@ RUN pip3 --no-cache-dir install mxnet  && \
     pip3 --no-cache-dir install graphviz
 
 # install pytorch
-RUN pip3 --no-cache-dir install http://download.pytorch.org/whl/cu75/torch-0.2.0.post2-cp35-cp35m-manylinux1_x86_64.whl && \ 
+RUN pip3 --no-cache-dir install http://download.pytorch.org/whl/cu80/torch-0.3.0.post4-cp35-cp35m-linux_x86_64.whl && \ 
     pip3 --no-cache-dir install torchvision
 
 
