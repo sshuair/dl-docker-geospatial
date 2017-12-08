@@ -84,6 +84,7 @@ RUN pip3 --no-cache-dir install \
         progressbar33 \
         opencv-contrib-python \
         tifffile \
+        tqdm \
         && \
     python3 -m ipykernel.kernelspec
 
