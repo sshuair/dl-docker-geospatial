@@ -63,6 +63,7 @@ RUN pip3 --no-cache-dir install \
         mercantile \
         rio_toa \
         cachetools \
+        pyyaml \
         rio-pansharpen \
         tqdm \
         && \
