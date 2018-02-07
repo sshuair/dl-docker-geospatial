@@ -102,7 +102,7 @@ RUN pip3 --no-cache-dir install \
 
 
 # install tensorflow and keras
-RUN pip3 --no-cache-dir install https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-1.4.0-cp35-cp35m-linux_x86_64.whl && \
+RUN pip3 --no-cache-dir install tensorflow-gpu && \
     pip3 --no-cache-dir install keras
 
 # install mxnet
