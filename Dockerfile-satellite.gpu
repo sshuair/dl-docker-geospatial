@@ -71,7 +71,7 @@ RUN pip3 --no-cache-dir install tensorflow-gpu && \
     pip3 --no-cache-dir install keras && \
     pip3 --no-cache-dir install mxnet-cu80==1.0.0 && \
     pip3 --no-cache-dir install graphviz && \
-    pip3 --no-cache-dir install pip3 install http://download.pytorch.org/whl/cu80/torch-0.3.1-cp35-cp35m-linux_x86_64.whl  && \
+    pip3 --no-cache-dir install http://download.pytorch.org/whl/cu80/torch-0.3.1-cp35-cp35m-linux_x86_64.whl  && \
     pip3 --no-cache-dir install torchvision
 
 # Set up our notebook config.
