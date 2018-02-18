@@ -28,13 +28,9 @@ RUN apt-get update --fix-missing && apt-get install -y --no-install-recommends\
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# install mapnik ，note: mapnik must install before gdal
+# install mapnik ，note: mapnik must install before gdal, install gdal  
 RUN apt-get update && apt-get --fix-missing install -y python3-mapnik && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/*
-
-# install gdal  
-RUN add-apt-repository -y ppa:ubuntugis/ppa && \ 
+    add-apt-repository -y ppa:ubuntugis/ppa && \ 
     apt update && \ 
     apt-get install -y --no-install-recommends gdal-bin libgdal-dev python3-gdal && \
     apt-get clean && \
