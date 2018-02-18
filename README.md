@@ -5,10 +5,10 @@ Deep learning docker with geo-package support. it's only support python3(current
 You can pull the image from docker hub: https://hub.docker.com/r/sshuair/dl-satellite/
 
 ## deep learning framework
-- tensorflow 1.4
-- keras 2.0.6
-- pytorch 0.3
-- mxnet 1.0.0
+- tensorflow
+- keras
+- pytorch
+- mxnet
 
 ## machine learning farmework
 - scikit-learn
