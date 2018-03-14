@@ -80,6 +80,9 @@ COPY jupyter_notebook_config.py /root/.jupyter/
 # Jupyter has issues with being run directly: https://github.com/ipython/ipython/issues/7062
 COPY run_jupyter.sh /
 
+# For CUDA profiling, TensorFlow requires CUPTI.
+ENV LD_LIBRARY_PATH /usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
+
 # TensorBoard(6006) # jupyter noteboook(8888)
 EXPOSE 6006 8888
 
