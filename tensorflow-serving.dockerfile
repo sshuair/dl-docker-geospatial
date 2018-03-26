@@ -48,4 +48,11 @@ RUN mkdir /bazel && \
 RUN echo "deb [arch=amd64] http://storage.googleapis.com/tensorflow-serving-apt stable tensorflow-model-server tensorflow-model-server-universal" | tee /etc/apt/sources.list.d/tensorflow-serving.list
 RUN curl https://storage.googleapis.com/tensorflow-serving-apt/tensorflow-serving.release.pub.gpg | apt-key add -
 RUN apt-get update && apt-get install tensorflow-model-server
+
+# https://stackoverflow.com/questions/44773296/libstdc-so-6-version-glibcxx-3-4-20-not-found
+RUN add-apt-repository ppa:ubuntu-toolchain-r/test
+RUN apt-get update && apt-get install -y gcc-4.9 && apt-get upgrade libstdc++6  && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
 CMD ["/bin/bash"]
