@@ -28,7 +28,7 @@ RUN apt-get update && apt-get install -y \
 
 # Set up grpc
 
-RUN pip install mock grpcio
+RUN pip install -y mock grpcio tensorflow
 
 # Set up Bazel.
 
@@ -54,5 +54,7 @@ RUN add-apt-repository ppa:ubuntu-toolchain-r/test
 RUN apt-get update && apt-get install -y gcc-4.9 && apt-get upgrade libstdc++6  && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-
+    
+RUN mkdir /workdir
+WORKDIR "/workdir"
 CMD ["/bin/bash"]
