@@ -22,6 +22,7 @@ RUN pip3 --no-cache-dir install setuptools && \
     pip3 --no-cache-dir install \
         flask \
         psycopg2-binary \
+        sqlalchemy \
         gunicorn \
         gevent \
         pandas \
