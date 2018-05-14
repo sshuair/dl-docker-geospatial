@@ -1,0 +1,32 @@
+FROM ubuntu:16.04
+
+# MAINTAINER sshuair<sshuair@gmail.com>
+
+# install dependencies
+RUN apt-get update --fix-missing && apt-get install -y --no-install-recommends\
+        git \
+        build-essential \
+        software-properties-common \
+        python3 \
+        python3-dev \
+        python3-pip \
+        && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
+
+RUN apt-get update && \
+    add-apt-repository -y ppa:ubuntugis/ppa && \ 
+    apt update
+
+RUN pip3 --no-cache-dir install setuptools && \
+    pip3 --no-cache-dir install \
+        flask \
+        psycopg2-binary \
+        gunicorn \
+        gevent \
+        pandas \
+        scipy \
+        scikit-learn \
+        xgboost \
+        geopandas \
+        redis \
