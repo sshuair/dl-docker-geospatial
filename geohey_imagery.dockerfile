@@ -41,19 +41,15 @@ RUN pip3 --no-cache-dir install\
     setuptools \
     Pillow \
     flask \
-    pymongo \
     ipykernel \
     numpy \
+    json \
     rasterio==1.0a12 \
     mercantile \
     rio_toa \
     cachetools \
     pyyaml \
     rio-pansharpen \
-    tqdm \
     && \
     python3 -m ipykernel.kernelspec
-RUN mkdir /server
 
-COPY g_imagery /server
-ENTRYPOINT ["python3", "/server/run.py" ]
