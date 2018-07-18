@@ -45,10 +45,5 @@ RUN pip3 --no-cache-dir install\
     numpy \
     rasterio==1.0a12 \
     mercantile \
-    rio_toa \
-    cachetools \
-    pyyaml \
     rio-pansharpen \
-    && \
-    python3 -m ipykernel.kernelspec
 
