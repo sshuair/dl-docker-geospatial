@@ -44,6 +44,5 @@ RUN pip3 --no-cache-dir install\
     ipykernel \
     numpy \
     rasterio==1.0a12 \
-    mercantile \
-    rio-pansharpen \
+    mercantile 
 
