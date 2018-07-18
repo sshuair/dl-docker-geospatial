@@ -43,7 +43,6 @@ RUN pip3 --no-cache-dir install\
     flask \
     ipykernel \
     numpy \
-    json \
     rasterio==1.0a12 \
     mercantile \
     rio_toa \
