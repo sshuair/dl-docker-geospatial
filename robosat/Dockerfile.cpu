@@ -28,6 +28,9 @@ RUN apt-get update --fix-missing && apt-get install -y --no-install-recommends\
         libexpat1-dev \
         zlib1g-dev \
         libbz2-dev \
+        libsm6 \
+        libxext6 \
+        libxrender1 \
         && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
@@ -58,5 +61,5 @@ COPY run_jupyter.sh /
 # jupyter noteboook(8888)
 EXPOSE 8888
 
-WORKDIR "/root"
+WORKDIR "/root/robosat"
 CMD ["/bin/bash"]
