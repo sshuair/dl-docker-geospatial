@@ -33,10 +33,10 @@ RUN apt-get update --fix-missing && apt-get install -y --no-install-recommends\
 RUN pip3 --no-cache-dir install setuptools && \
 # note: due to pytorch 0.2 rely on numpy 1.13, it's have to upgrade numpy from 1.11.0 to 1.13.1
     # pip3 --no-cache-dir install --upgrade numpy && \
+    pip3 --no-cache-dir install http://download.pytorch.org/whl/cpu/torch-0.4.0-cp35-cp35m-linux_x86_64.whl && \
     pip3 --no-cache-dir install \
         ipykernel \
         jupyter \
-        http://download.pytorch.org/whl/cpu/torch-0.4.0-cp35-cp35m-linux_x86_64.whl \
         torchvision \
         && \
     python3 -m ipykernel.kernelspec
