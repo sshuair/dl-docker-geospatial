@@ -7,14 +7,13 @@ RUN apt-get update --fix-missing && apt-get install -y --no-install-recommends\
         build-essential \
         software-properties-common \
         curl \
+        cmake \
         libfreetype6-dev \
         libpng12-dev \
         libzmq3-dev \
-        libexpat1-dev \
-        zlib1g-dev \
-        libbz2-dev \
         libspatialindex-dev \
         pkg-config \
+        rsync \
         zip \
         unzip \
         git \
@@ -26,6 +25,9 @@ RUN apt-get update --fix-missing && apt-get install -y --no-install-recommends\
         python3-pip \
         ipython3 \
         libboost-python-dev \
+        libexpat1-dev \
+        zlib1g-dev \
+        libbz2-dev \
         && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
