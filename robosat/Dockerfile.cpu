@@ -42,8 +42,8 @@ RUN pip3 --no-cache-dir install setuptools && \
     python3 -m ipykernel.kernelspec
 
 # get robosat
-RUN git clone https://github.com/mapbox/robosat.git && \
-    cd robosat \
+RUN git clone https://github.com/mapbox/robosat.git /root && \
+    cd /root/robosat && \
     pip3 --no-cache-dir install -r deps/requirements-lock.txt 
 
 # Set up our notebook config.
