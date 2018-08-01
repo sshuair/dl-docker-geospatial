@@ -4,7 +4,7 @@ MAINTAINER jingcb<jingcb@geohey.com>
 
 
 
-
+ENV LANG="en_US.UTF-8"
 # install dependencies
 RUN apt-get update --fix-missing && apt-get install -y --no-install-recommends\ 
     build-essential \
