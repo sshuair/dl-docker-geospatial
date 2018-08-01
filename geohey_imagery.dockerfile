@@ -35,10 +35,9 @@ RUN add-apt-repository -y ppa:ubuntugis/ppa && \
     apt-get install -y --no-install-recommends gdal-bin libgdal-dev python3-gdal && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-
+RUN pip3 install setuptools 
 # note: due to pytorch 0.2 rely on numpy 1.13, it's have to upgrade numpy from 1.11.0 to 1.13.
 RUN pip3 --no-cache-dir install\
-    setuptools \
     Pillow \
     flask \
     ipykernel \
