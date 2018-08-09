@@ -35,7 +35,7 @@ RUN add-apt-repository -y ppa:ubuntugis/ppa && \
 RUN pip3 --no-cache-dir install setuptools && \
     pip3 --no-cache-dir install wheel && \
     pip3 --no-cache-dir install http://download.pytorch.org/whl/cu${CUDA}/torch-${TORCH}-cp${PYTHON}-cp${PYTHON}m-linux_x86_64.whl
-RUN cp requirements-lock.txt / && \
+RUN cp deepsat/requirements-lock.txt / && \
     cd / && \
 
     pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple -r requirements-lock.txt
