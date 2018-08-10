@@ -47,7 +47,7 @@ RUN pip3 --no-cache-dir install setuptools && \
         gdal==2.1.3 \
         rasterio===1.0.2 \
         torch==0.4.0 \
-        torchvision==0.2.1 \
+        torchvision==0.2.1
 
 WORKDIR "/root/deepsat"    
 CMD ["/bin/bash"]
