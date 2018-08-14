@@ -37,7 +37,7 @@ RUN pip3 --no-cache-dir install setuptools && \
         flask \
         ipykernel \
         numpy \
-        rasterio \
+        rasterio==1.0a12 \
         mercantile \
         rio_toa \
         cachetools \
