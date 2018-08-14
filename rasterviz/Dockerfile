@@ -44,8 +44,7 @@ RUN pip3 --no-cache-dir install setuptools && \
         pyyaml \
         rio-pansharpen \
         gevent \
-        gunicorn \
-        && \
+        gunicorn 
 
 WORKDIR "/root/workdir"    
 CMD ["/bin/bash"]
