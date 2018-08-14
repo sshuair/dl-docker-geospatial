@@ -43,7 +43,8 @@ RUN pip3 --no-cache-dir install setuptools && \
         cachetools \
         pyyaml \
         rio-pansharpen \
-        gunicon \
+        gevent \
+        gunicorn \
         && \
 
 WORKDIR "/root/workdir"    
