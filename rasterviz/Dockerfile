@@ -1,9 +1,5 @@
-FROM nvidia/cuda:9.0-base-ubuntu16.04
+FROM ubuntu:16.04    
 
-ARG TORCH=0.4.0    
-ARG CUDA=90 
-ARG PYTHON=35    
-    
 # install dependencies    
 RUN apt-get update --fix-missing && apt-get install -y --no-install-recommends\     
         build-essential \
@@ -25,29 +21,30 @@ RUN apt-get update --fix-missing && apt-get install -y --no-install-recommends\
     apt-get clean && \    
     rm -rf /var/lib/apt/lists/*    
 
-# install mapnik ，note: mapnik must install before gdal, install gdal  
+# install gdal
 RUN add-apt-repository -y ppa:ubuntugis/ppa && \ 
     apt update && \ 
     apt-get install -y --no-install-recommends gdal-bin libgdal-dev python3-gdal && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+
 # install python package
 RUN pip3 --no-cache-dir install setuptools && \
     pip3 --no-cache-dir install wheel && \
-    pip3 --no-cache-dir install http://download.pytorch.org/whl/cu${CUDA}/torch-${TORCH}-cp${PYTHON}-cp${PYTHON}m-linux_x86_64.whl && \
-    pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple \
-        tqdm==4.23.4 \
-        numpy==1.14.5 \
-        scipy==1.1.0 \
-        Pillow==5.1.0 \
-        opencv-contrib-python==3.4.1.15 \
-        scikit-image==0.14.0 \
-        pyyaml==3.13 \
-        gdal==2.1.3 \
-        rasterio==1.0.2 \
-        torch==0.4.0 \
-        torchvision==0.2.1
+    pip3 --no-cache-dir install -i https://pypi.tuna.tsinghua.edu.cn/simple \
+        Pillow \
+        flask \
+        ipykernel \
+        numpy \
+        rasterio==1.0a12 \
+        mercantile \
+        rio_toa \
+        cachetools \
+        pyyaml \
+        rio-pansharpen \
+        gevent \
+        gunicorn 
 
-WORKDIR "/root/deepsat"    
+WORKDIR "/root/workdir"    
 CMD ["/bin/bash"]
