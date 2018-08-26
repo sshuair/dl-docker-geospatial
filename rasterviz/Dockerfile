@@ -1,5 +1,7 @@
 FROM ubuntu:16.04    
 
+ENV LANG C.UTF-8
+
 # install dependencies    
 RUN apt-get update --fix-missing && apt-get install -y --no-install-recommends\     
         build-essential \
@@ -8,15 +10,9 @@ RUN apt-get update --fix-missing && apt-get install -y --no-install-recommends\
         python3-dev \
         python3-tk \
         python3-pip \
-        build-essential \
-        libfreetype6-dev \
-        libpng12-dev \
-        libzmq3-dev \
         libspatialindex-dev \
         libsm6 \
         vim \
-        wget \
-        git \
         && \    
     apt-get clean && \    
     rm -rf /var/lib/apt/lists/*    
@@ -28,16 +24,14 @@ RUN add-apt-repository -y ppa:ubuntugis/ppa && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-
 # install python package
 RUN pip3 --no-cache-dir install setuptools && \
-    pip3 --no-cache-dir install wheel && \
     pip3 --no-cache-dir install -i https://pypi.tuna.tsinghua.edu.cn/simple \
+        ipykernel \
         Pillow \
         flask \
-        ipykernel \
         numpy \
-        rasterio==1.0a12 \
+        rasterio \
         mercantile \
         rio_toa \
         cachetools \
