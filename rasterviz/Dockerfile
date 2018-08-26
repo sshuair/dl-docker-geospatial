@@ -40,5 +40,6 @@ RUN pip3 --no-cache-dir install setuptools && \
         gevent \
         gunicorn 
 
-WORKDIR "/root/workdir"    
-CMD ["/bin/bash"]
+WORKDIR "/root/workdir"
+CMD ["./entrypoint.sh"]
+
