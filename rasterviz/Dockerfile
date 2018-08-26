@@ -11,7 +11,6 @@ RUN apt-get update --fix-missing && apt-get install -y --no-install-recommends\
         python3-tk \
         python3-pip \
         libspatialindex-dev \
-        libsm6 \
         vim \
         && \    
     apt-get clean && \    
@@ -41,5 +40,5 @@ RUN pip3 --no-cache-dir install setuptools && \
         gunicorn 
 
 WORKDIR "/root/workdir"
-CMD ["./entrypoint.sh"]
+CMD ["/bin/bash"]
 
