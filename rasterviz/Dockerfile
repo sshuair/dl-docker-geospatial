@@ -31,14 +31,8 @@ RUN pip3 --no-cache-dir install setuptools && \
         flask \
         numpy \
         rasterio \
-        mercantile \
-        rio_toa \
-        cachetools \
         pyyaml \
-        rio-pansharpen \
         gevent \
         gunicorn 
 
-WORKDIR "/root/workdir"
-CMD ["/bin/bash"]
 
