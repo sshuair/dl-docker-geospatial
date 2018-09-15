@@ -27,9 +27,11 @@ RUN add-apt-repository -y ppa:ubuntugis/ppa && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
+RUN python3.6 -m pip install pip --upgrade && \
+    python3.6 -m pip install wheel
 # install python package
-RUN pip3 --no-cache-dir install setuptools && \
-    pip3 --no-cache-dir install -i https://pypi.tuna.tsinghua.edu.cn/simple \
+RUN pip --no-cache-dir install setuptools && \
+    pip --no-cache-dir install -i https://pypi.tuna.tsinghua.edu.cn/simple \
         ipykernel \
         Pillow==5.2.0 \
         Flask==1.0.2 \
