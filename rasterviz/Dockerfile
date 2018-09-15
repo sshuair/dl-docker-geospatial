@@ -3,16 +3,18 @@ FROM ubuntu:16.04
 ENV LANG C.UTF-8
 
 # install dependencies and python3.6 
-RUN add-apt-repository -y ppa:jonathonf/python-3.6 && \ 
-        apt-get update --fix-missing && apt-get install -y --no-install-recommends\     
-        build-essential \
-        software-properties-common \
-        python3.6 \ 
-        python3.6-dev \
-        python3.6-tk \
-        python3-pip \
-        python3.6-venv \
-        libspatialindex-dev \
+RUN apt-get update --fix-missing && apt-get install -y --no-install-recommends \     
+            build-essential \
+            software-properties-common && \
+        add-apt-repository -y ppa:jonathonf/python-3.6 && \ 
+        apt update && \
+        apt-get install -y --no-install-recommends \
+            python3.6 \ 
+            python3.6-dev \
+            python3.6-tk \
+            python3-pip \
+            python3.6-venv \
+            libspatialindex-dev \
         vim \
         && \    
     apt-get clean && \    
