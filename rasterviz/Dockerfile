@@ -15,7 +15,7 @@ RUN apt-get update --fix-missing && apt-get install -y --no-install-recommends \
             python3-pip \
             python3.6-venv \
             libspatialindex-dev \
-        vim \
+            vim \
         && \    
     apt-get clean && \    
     rm -rf /var/lib/apt/lists/*    
@@ -34,7 +34,7 @@ RUN pip3 --no-cache-dir install setuptools && \
         Pillow==5.2.0 \
         Flask==1.0.2 \
         numpy==1.14.5 \
-        rasterio=1.0.2 \
+        rasterio==1.0.2 \
         gunicorn==19.8.1 \
         gevent==1.3.0
 
