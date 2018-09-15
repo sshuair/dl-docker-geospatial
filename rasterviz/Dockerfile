@@ -2,7 +2,7 @@ FROM ubuntu:16.04
 
 ENV LANG C.UTF-8
 
-# install dependencies    
+# install dependencies and python3.6 
 RUN add-apt-repository -y ppa:jonathonf/python-3.6 && \ 
         apt-get update --fix-missing && apt-get install -y --no-install-recommends\     
         build-essential \
