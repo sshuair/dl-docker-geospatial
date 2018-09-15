@@ -3,13 +3,15 @@ FROM ubuntu:16.04
 ENV LANG C.UTF-8
 
 # install dependencies    
-RUN apt-get update --fix-missing && apt-get install -y --no-install-recommends\     
+RUN add-apt-repository -y ppa:jonathonf/python-3.6 && \ 
+        apt-get update --fix-missing && apt-get install -y --no-install-recommends\     
         build-essential \
         software-properties-common \
-        python3 \
-        python3-dev \
-        python3-tk \
+        python3.6 \ 
+        python3.6-dev \
+        python3.6-tk \
         python3-pip \
+        python3.6-venv \
         libspatialindex-dev \
         vim \
         && \    
