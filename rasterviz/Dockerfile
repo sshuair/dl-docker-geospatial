@@ -27,12 +27,12 @@ RUN add-apt-repository -y ppa:ubuntugis/ppa && \
 RUN pip3 --no-cache-dir install setuptools && \
     pip3 --no-cache-dir install -i https://pypi.tuna.tsinghua.edu.cn/simple \
         ipykernel \
-        Pillow \
-        flask \
-        numpy \
-        rasterio \
-        pyyaml \
-        gevent \
-        gunicorn 
+        Pillow==5.2.0 \
+        Flask==1.0.2 \
+        numpy==1.14.5 \
+        rasterio=1.0.2 \
+        gunicorn==19.8.1 \
+        gevent==1.3.0
+
 
 
