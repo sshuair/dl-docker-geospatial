@@ -21,11 +21,12 @@ RUN apt-get update --fix-missing && apt-get install -y --no-install-recommends\
         vim \
         wget \
         git \
-        && \    
+        zip \
+        && \
     apt-get clean && \    
     rm -rf /var/lib/apt/lists/*    
 
-# install gdal
+# install mapnik ，note: mapnik must install before gdal, install gdal  
 RUN add-apt-repository -y ppa:ubuntugis/ppa && \ 
     apt update && \ 
     apt-get install -y --no-install-recommends gdal-bin libgdal-dev python3-gdal && \
@@ -35,7 +36,6 @@ RUN add-apt-repository -y ppa:ubuntugis/ppa && \
 # install python package
 RUN pip3 --no-cache-dir install setuptools && \
     pip3 --no-cache-dir install wheel && \
-    pip3 --no-cache-dir install http://download.pytorch.org/whl/cpu/torch-${TORCH}-cp${PYTHON}-cp${PYTHON}m-linux_x86_64.whl && \
     pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple \
         tqdm==4.23.4 \
         numpy==1.14.5 \
@@ -45,8 +45,8 @@ RUN pip3 --no-cache-dir install setuptools && \
         scikit-image==0.14.0 \
         pyyaml==3.13 \
         gdal==2.1.3 \
-        rasterio==1.0.2 \
-        torch==0.4.0 \
+        rasterio===1.0.2 \
+        torch==1.0.0 \
         torchvision==0.2.1
 
 WORKDIR "/root/deepsat"    
