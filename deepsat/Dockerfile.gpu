@@ -1,6 +1,6 @@
 FROM nvidia/cuda:9.0-base-ubuntu16.04
 
-ARG TORCH=0.4.0    
+ARG TORCH=1.0.0   
 ARG CUDA=90 
 ARG PYTHON=35    
     
@@ -21,6 +21,7 @@ RUN apt-get update --fix-missing && apt-get install -y --no-install-recommends\
         vim \
         wget \
         git \
+        zip \
         && \    
     apt-get clean && \    
     rm -rf /var/lib/apt/lists/*    
@@ -45,8 +46,7 @@ RUN pip3 --no-cache-dir install setuptools && \
         scikit-image==0.14.0 \
         pyyaml==3.13 \
         gdal==2.1.3 \
-        rasterio==1.0.2 \
-        torch==0.4.0 \
+        rasterio===1.0.2 \
         torchvision==0.2.1
 
 WORKDIR "/root/deepsat"    
