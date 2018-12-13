@@ -1,8 +1,4 @@
 FROM nvidia/cuda:9.0-base-ubuntu16.04
-
-ARG TORCH=1.0.0   
-ARG CUDA=90 
-ARG PYTHON=35    
     
 # install dependencies    
 RUN apt-get update --fix-missing && apt-get install -y --no-install-recommends\     
@@ -36,7 +32,7 @@ RUN add-apt-repository -y ppa:ubuntugis/ppa && \
 # install python package
 RUN pip3 --no-cache-dir install setuptools && \
     pip3 --no-cache-dir install wheel && \
-    pip3 --no-cache-dir install http://download.pytorch.org/whl/cu${CUDA}/torch-${TORCH}-cp${PYTHON}-cp${PYTHON}m-linux_x86_64.whl && \
+    pip3 --no-cache-dir install http://download.pytorch.org/whl/cu90/torch-0.4.1-cp35-cp35m-linux_x86_64.whl && \
     pip3 install -i https://pypi.tuna.tsinghua.edu.cn/simple \
         tqdm==4.23.4 \
         numpy==1.14.5 \
