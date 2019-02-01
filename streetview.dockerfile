@@ -28,12 +28,15 @@ RUN apt-get update --fix-missing && apt-get install -y --no-install-recommends\
 
 
 # install python package
-RUN pip3 --no-cache-dir install setuptools \
+RUN pip3 --no-cache-dir install -i https://pypi.tuna.tsinghua.edu.cn/simple setuptools
+RUN pip3 --no-cache-dir install -i https://pypi.tuna.tsinghua.edu.cn/simple  \
 	numpy \
     Pillow \
     flask \
-    tarfile \
-    tensorflow 
+    tensorflow \
+    torch \
+    torchvision \
+    opencv-python
 
 
 # TensorBoard(6006) # jupyter noteboook(8888)
@@ -41,8 +44,8 @@ EXPOSE 6006 8888 7777
 
 RUN mkdir /workdir
 
-COPY /Users/zhangyaxu/street-view /workdir
+COPY /street-view /workdir/street-view
 
 WORKDIR "/root"
 # CMD ["/bin/bash"]
-ENTRYPOINT ["python3", "/workdir/app.py"]
+ENTRYPOINT ["python3", "/workdir/street-view/app.py"]
