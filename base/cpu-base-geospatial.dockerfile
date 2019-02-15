@@ -1,4 +1,4 @@
-FROM ubuntu:16.04
+FROM ubuntu:18.04
 
 # install dependencies    
 RUN apt-get update --fix-missing && apt-get install -y --no-install-recommends\     
