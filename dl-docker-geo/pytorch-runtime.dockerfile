@@ -49,9 +49,8 @@ RUN pip3 --no-cache-dir install setuptools && \
 
 # install deep learning framework
 RUN pip3 --no-cache-dir install \
-    torch==${TORCH_VERSION} \
-    torchvision \
-    tensorflow==${TENSORFLOW_VERSION}
+    https://download.pytorch.org/whl/cu100/torch-1.0.1.post2-cp36-cp36m-linux_x86_64.whl \
+    torchvision
 
 # Set up our notebook config.
 COPY jupyter_notebook_config.py /root/.jupyter/
