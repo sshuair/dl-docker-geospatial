@@ -1,4 +1,21 @@
-# geo deep learning docker
+# Deep Learning Docker for Geospatial
+
+### support image tags
+- tf-1.12.0-cuda10-devel
+- tf-1.13.0-cuda10-runtime
+- tf-1.12.0-cpu
+- 
+- pytorch-0.4.1-cuda10-runtime
+- pytorch-0.4.1-cuda10-devel
+- pytorch-0.4.1-cpu
+- pytorch-1.0.1-cuda10-runtime
+- pytorch-1.0.1-cuda10-devel
+- pytorch-1.0.1-cpu
+
+
+
+- Dockerfile-satellite.cpu
+- Dockerfile-satellite.gpu
 
 Deep learning docker with geo-package support. it's only support python3(currently python 3.5).
 
@@ -64,3 +81,10 @@ If you want run jupyter notebook in a docker container you should use the follow
 Please note that PyTorch uses shared memory to share data between processes, so if torch multiprocessing is used (e.g. for multithreaded data loaders) the default shared memory segment size that container runs with is not enough, and you should increase shared memory size either with --ipc=host or --shm-size command line options to nvidia-docker run.
 
 `nvidia-docker run --rm -ti --ipc=host sshuair/dl-satellite:gpu`
+
+
+# Other geo related docker
+
+- geohey_imagery.dockerfile: GeoHey imagery dockerfile.
+- mapnik.dockerfile: mapnik dockerfile.
+- tensorflow-serving.dockerfile: tensorflow serving docker file for GIS.
