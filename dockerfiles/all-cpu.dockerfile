@@ -2,7 +2,7 @@ FROM ubuntu:18.04
 ENV LANG=C.UTF-8
 ENV DEBIAN_FRONTEND=noninteractive
 
-ARG TORCH_VERSION=1.0.1
+ARG TORCH_VERSION=1.0.1.post2
 ARG TENSORFLOW_VERSION=1.12.0
 
 # install dependencies    
@@ -50,7 +50,7 @@ RUN pip3 --no-cache-dir install setuptools && \
 
 # install deep learning framework
 RUN pip3 --no-cache-dir install \
-    torch==${TORCH_VERSION} \
+    https://download.pytorch.org/whl/cpu/torch-${TORCH_VERSION}-cp36-cp36m-linux_x86_64.whl \
     torchvision \
     tensorflow==${TENSORFLOW_VERSION}
 
