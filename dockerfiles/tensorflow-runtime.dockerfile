@@ -1,9 +1,10 @@
 ARG CUDA=10.0
 ARG CUDNN=7
-ARG TENSORFLOW_VERSION=1.12.0
 
 FROM nvidia/cuda:${CUDA}-cudnn${CUDNN}-runtime-ubuntu18.04
 ENV LANG=C.UTF-8
+ARG TENSORFLOW_VERSION=1.12.0
+
 # install dependencies    
 RUN apt-get update --fix-missing && apt-get install -y --no-install-recommends\     
         build-essential \

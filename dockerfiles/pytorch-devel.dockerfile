@@ -1,9 +1,10 @@
 ARG CUDA=10.0
 ARG CUDNN=7
-ARG TORCH_VERSION=1.0.1
 
 FROM nvidia/cuda:${CUDA}-cudnn${CUDNN}-devel-ubuntu18.04
 ENV LANG=C.UTF-8
+ARG TORCH_VERSION=1.0.1
+
 # install dependencies    
 RUN apt-get update --fix-missing && apt-get install -y --no-install-recommends\     
         build-essential \
