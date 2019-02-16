@@ -3,6 +3,7 @@ ARG CUDNN=7
 
 FROM nvidia/cuda:${CUDA}-cudnn${CUDNN}-runtime-ubuntu18.04
 ENV LANG=C.UTF-8
+ENV DEBIAN_FRONTEND=noninteractive
 ARG TENSORFLOW_VERSION=1.12.0
 
 # install dependencies    
