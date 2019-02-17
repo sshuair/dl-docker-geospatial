@@ -1,6 +1,7 @@
 # Deep Learning Docker for Geospatial
 Deep learning docker files and docker images for geospatial anaysis. It contains the most popular deep learning frameworks(PyTorch and Tensorflow) with CPU and GPU support (CUDA and cuDNN included). And some other commonly used packages in machine learning and geospatial anaysis.
-docker hub: [deepgeo](https://hub.docker.com/r/sshuair/deepgeo/)
+
+Docker Hub: [deepgeo](https://hub.docker.com/r/sshuair/deepgeo/)
 
 ## support docker image tags
 - all-cpu-torch1.0.1-tf0.12.0
@@ -21,7 +22,7 @@ docker hub: [deepgeo](https://hub.docker.com/r/sshuair/deepgeo/)
 - scikit-image
 - xgboost
 
-### geo packages
+### geospatial packages
 - GDAL
 - fiona
 - shapely
