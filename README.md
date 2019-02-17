@@ -1,90 +1,59 @@
 # Deep Learning Docker for Geospatial
+Deep learning docker files and docker images for geospatial anaysis. It contains the most popular deep learning frameworks(PyTorch and Tensorflow) with CPU and GPU support (CUDA and cuDNN included). And some other commonly used packages in machine learning and geospatial anaysis.
+docker hub: [deepgeo](https://hub.docker.com/r/sshuair/deepgeo/)
 
-### support image tags
-- tf-1.12.0-cuda10-devel
+## support docker image tags
+- all-cpu-torch1.0.1-tf0.12.0
 - tf-1.13.0-cuda10-runtime
-- tf-1.12.0-cpu
-- 
-- pytorch-0.4.1-cuda10-runtime
-- pytorch-0.4.1-cuda10-devel
-- pytorch-0.4.1-cpu
 - pytorch-1.0.1-cuda10-runtime
 - pytorch-1.0.1-cuda10-devel
-- pytorch-1.0.1-cpu
+- tensorflow-0.12.0-cuda10-runtime
+- tensorflow-0.12.0-cuda10-devel
 
-
-
-- Dockerfile-satellite.cpu
-- Dockerfile-satellite.gpu
-
-Deep learning docker with geo-package support. it's only support python3(currently python 3.5).
-
-You can pull the image from docker hub: https://hub.docker.com/r/sshuair/dl-satellite/
-
-## deep learning framework
+## packages contain
+### deep learning framework
 - tensorflow
 - keras
 - pytorch
-- mxnet
 
-## machine learning farmework
+### machine learning farmework
 - scikit-learn
 - scikit-image
 - xgboost
-- hyperopt
 
-## geo packages
-- gdal
-- mapnik
+### geo packages
+- GDAL
+- fiona
 - shapely
-- folium
 - rasterio
 - tifffile
 - geopandas
-- ipyleaflet
 
-## other related packages
+### other related packages
 - numpy
 - scipy
-- OpenCV 3
+- OpenCV
 - Pillow
 - jupyter
-- h5py
 - matplotlib
 - pandas
-- sympy
-- bokeh
-- progressbar33
 
 ## usage
 ### build image
 
-`docker build -t repository:tag . -f Dockerfile.cpu`
+`docker build -t REPOSITORY:TAG -f Dockerfile .`
 
 ### pull image
 
-- cpu version: `docker pull sshuair/dl-satellite:cpu`
-- gpu version: `docker pull sshuair/dl-satellite:gpu`
+- cpu version: `docker pull sshuair/deepgeo:[TAG]`
+- gpu version: `docker pull sshuair/deepgao:[TAG]`
 
 ### start container
-1. cpu: `docker run -it --name dl-satellite -p 8888:8888 -p 6006:6006 -v /sharedfolder:/workdir sshuair/dl-satellite:cpu bash`
-2. gpu: `nvidia-docker run -it --name dl-satellite -p 8888:8888 -p 6006:6006 -v /sharedfolder:/workdir sshuair/dl-satellite:gpu bash`
+1. cpu: `docker run -it --name [CONTAINER-NAME] -p 8888:8888 -p 6006:6006 -v /sharedfolder:/workdir sshuair/deepgeo:[TAG] bash`
+2. gpu: `nvidia-docker run -it --name [CONTAINER-NAME] -p 8888:8888 -p 6006:6006 -v /sharedfolder:/workdir sshuair/deepgeo:[TAG] bash`
 
 
-## useful command
-## jupyter notebook
+### jupyter notebook
 If you want run jupyter notebook in a docker container you should use the follow command in a running docker container:
 `jupyter notebook --allow-root`
 
-
-## pytorch ipc
-Please note that PyTorch uses shared memory to share data between processes, so if torch multiprocessing is used (e.g. for multithreaded data loaders) the default shared memory segment size that container runs with is not enough, and you should increase shared memory size either with --ipc=host or --shm-size command line options to nvidia-docker run.
-
-`nvidia-docker run --rm -ti --ipc=host sshuair/dl-satellite:gpu`
-
-
-# Other geo related docker
-
-- geohey_imagery.dockerfile: GeoHey imagery dockerfile.
-- mapnik.dockerfile: mapnik dockerfile.
-- tensorflow-serving.dockerfile: tensorflow serving docker file for GIS.

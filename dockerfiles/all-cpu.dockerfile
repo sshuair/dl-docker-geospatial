@@ -52,7 +52,8 @@ RUN pip3 --no-cache-dir install setuptools && \
 RUN pip3 --no-cache-dir install \
     https://download.pytorch.org/whl/cpu/torch-${TORCH_VERSION}-cp36-cp36m-linux_x86_64.whl \
     torchvision \
-    tensorflow==${TENSORFLOW_VERSION}
+    tensorflow==${TENSORFLOW_VERSION} \
+    keras
 
 # Set up our notebook config.
 COPY jupyter_notebook_config.py /root/.jupyter/

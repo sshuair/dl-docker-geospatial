@@ -52,7 +52,8 @@ RUN pip3 --no-cache-dir install setuptools && \
 
 # install deep learning framework
 RUN pip3 --no-cache-dir install \
-    https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-${TENSORFLOW_VERSION}-cp36-cp36m-linux_x86_64.whl
+    https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-${TENSORFLOW_VERSION}-cp36-cp36m-linux_x86_64.whl \
+    keras
 
 # Set up our notebook config.
 COPY jupyter_notebook_config.py /root/.jupyter/

@@ -1,9 +1,12 @@
-FROM ubuntu:18.04
-ENV LANG=C.UTF-8
+ARG CUDA=10.0
+ARG CUDNN=7
 
-ARG TORCH_VERSION=0.4.1
+FROM nvidia/cuda:${CUDA}-cudnn${CUDNN}-runtime-ubuntu18.04
+ENV LANG=C.UTF-8
+ENV DEBIAN_FRONTEND=noninteractive
+
+ARG TORCH_VERSION=1.0.1
 ARG TENSORFLOW_VERSION=1.12.0
-ARG CUDA=10
 
 # install dependencies    
 RUN apt-get update --fix-missing && apt-get install -y --no-install-recommends\     
@@ -50,9 +53,10 @@ RUN pip3 --no-cache-dir install setuptools && \
 
 # install deep learning framework
 RUN pip3 --no-cache-dir install \
-    torch==${TORCH_VERSION} \
+    https://download.pytorch.org/whl/cu1001.0.1.post2/torch--cp36-cp36m-linux_x86_64.whl \
     torchvision \
-    tensorflow==${TENSORFLOW_VERSION}
+    https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-${TENSORFLOW_VERSION}-cp36-cp36m-linux_x86_64.whl \
+    keras
 
 # Set up our notebook config.
 COPY jupyter_notebook_config.py /root/.jupyter/
