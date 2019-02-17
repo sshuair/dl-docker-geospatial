@@ -5,7 +5,8 @@ Docker Hub: [deepgeo](https://hub.docker.com/r/sshuair/deepgeo/)
 
 ## support docker image tags
 - all-cpu-torch1.0.1-tf0.12.0
-- tf-1.13.0-cuda10-runtime
+- all-cuda10-cudnn7-runtime-torch1.0.1-tf0.12.0
+- all-cuda10-cudnn7-devel-torch1.0.1-tf0.12.0
 - pytorch-1.0.1-cuda10-runtime
 - pytorch-1.0.1-cuda10-devel
 - tensorflow-0.12.0-cuda10-runtime
