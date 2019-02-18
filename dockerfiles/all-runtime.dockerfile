@@ -5,7 +5,7 @@ FROM nvidia/cuda:${CUDA}-cudnn${CUDNN}-runtime-ubuntu18.04
 ENV LANG=C.UTF-8
 ENV DEBIAN_FRONTEND=noninteractive
 
-ARG TORCH_VERSION=1.0.1
+ARG TORCH_VERSION=1.0.1.post2
 ARG TENSORFLOW_VERSION=1.12.0
 
 # install dependencies    
