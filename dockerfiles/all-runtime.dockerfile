@@ -53,7 +53,7 @@ RUN pip3 --no-cache-dir install setuptools && \
 
 # install deep learning framework
 RUN pip3 --no-cache-dir install \
-    https://download.pytorch.org/whl/cu1001.0.1.post2/torch--cp36-cp36m-linux_x86_64.whl \
+    https://download.pytorch.org/whl/cu100/torch-${TORCH_VERSION}-cp36-cp36m-linux_x86_64.whl \
     torchvision \
     https://storage.googleapis.com/tensorflow/linux/gpu/tensorflow_gpu-${TENSORFLOW_VERSION}-cp36-cp36m-linux_x86_64.whl \
     keras
